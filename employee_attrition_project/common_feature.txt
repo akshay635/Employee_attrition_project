@@ -1,0 +1,9 @@
+['Work_life_balance',
+ 'Years_since_last_promotion',
+ 'Distance_From_Home',
+ 'Job_Involvement',
+ 'Environment_Satisfaction',
+ 'Job_Satisfaction',
+ 'Job_Level',
+ 'Number_of_Companies_Worked_previously',
+ 'Business_Travel']
