@@ -14,29 +14,29 @@ import json
 
 
 # Open and read the JSON file
-with open('medians.json', 'r') as file:
+with open('employee_attrition_project/medians.json', 'r') as file:
     medians = json.load(file)
     
 # Open and read the JSON file
-with open('modes.json', 'r') as file:
+with open('employee_attrition_project/modes.json', 'r') as file:
     modes = json.load(file)
 
 
 @st.cache_data
 def load_data():
-    features_rf = pd.read_csv('C:/Users/aksha/employee_attrition_project/data/feature_importances_rf.csv')
-    features_lg = pd.read_csv('C:/Users/aksha/employee_attrition_project/data/feature_importances_lg.csv')
-    features_dt = pd.read_csv('C:/Users/aksha/employee_attrition_project/data/feature_importances_dt.csv')
-    features_cat = pd.read_csv('C:/Users/aksha/employee_attrition_project/data/feature_importances_cat.csv')
+    features_rf = pd.read_csv('employee_attrition_project/data/feature_importances_rf.csv')
+    features_lg = pd.read_csv('employee_attrition_project/data/feature_importances_lg.csv')
+    features_dt = pd.read_csv('employee_attrition_project/data/feature_importances_dt.csv')
+    features_cat = pd.read_csv('employee_attrition_project/data/feature_importances_cat.csv')
     
     return features_lg, features_rf, features_dt, features_cat
 
 @st.cache_resource
 def load_models():
-    model_lg = joblib.load('C:/Users/aksha/employee_attrition_project/models/lg_attrition.joblib')
-    model_rf = joblib.load('C:/Users/aksha/employee_attrition_project/models/rf_attrition.joblib')
-    model_dt = joblib.load('C:/Users/aksha/employee_attrition_project/models/dt_attrition.joblib')
-    model_cat = joblib.load('C:/Users/aksha/employee_attrition_project/models/cat_attrition.joblib')
+    model_lg = joblib.load('employee_attrition_project/models/lg_attrition.joblib')
+    model_rf = joblib.load('employee_attrition_project/models/rf_attrition.joblib')
+    model_dt = joblib.load('employee_attrition_project/models/dt_attrition.joblib')
+    model_cat = joblib.load('employee_attrition_project/models/cat_attrition.joblib')
     
     return model_lg, model_rf, model_dt, model_cat
 
@@ -96,7 +96,7 @@ inputs = {'Work_life_balance': wlb,
 
 
 with st.sidebar:
-    st.image("C:/Users/aksha/employee_attrition_project/employee-attrition-rate.jpg", use_container_width=True)
+    st.image("employee_attrition_project/employee-attrition-rate.jpg", use_container_width=True)
 
 
 baseline = {}
@@ -211,4 +211,5 @@ with col2:
         
         
         
+
         
