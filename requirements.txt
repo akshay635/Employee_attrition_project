@@ -1,3 +1,4 @@
+pandas<=2.3.3 
 numpy<=1.26.4                                                    
 scikit-learn<=1.8.0                  
 scipy<=1.16.3                 
@@ -10,5 +11,6 @@ joblib
 json5
 
               
+
 
 
