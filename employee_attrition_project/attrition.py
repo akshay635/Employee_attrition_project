@@ -14,11 +14,11 @@ import json
 
 
 # Open and read the JSON file
-with open('employee_attrition_project/medians.json', 'r') as file:
+with open('employee_attrition_project/data/medians.json', 'r') as file:
     medians = json.load(file)
     
 # Open and read the JSON file
-with open('employee_attrition_project/modes.json', 'r') as file:
+with open('employee_attrition_project/data/modes.json', 'r') as file:
     modes = json.load(file)
 
 
@@ -213,3 +213,4 @@ with col2:
         
 
         
+
