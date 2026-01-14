@@ -47,7 +47,7 @@ model_lg, model_rf, model_dt, model_cat = load_models()
 common_features = ['Environment_Satisfaction', 'Salary_Hike_in_percent', 
                    'Salary', 'Job_Involvement', 'Years_since_last_promotion',
                    'Age', 'Overtime', 'Job_Satisfaction', 'Business_Travel',
-                   'Distance_From_Home', 'Work_life_balance' 'Department', 'Job_Role']
+                   'Distance_From_Home', 'Work_life_balance', 'Department', 'Job_Role']
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
@@ -160,7 +160,12 @@ with col1:
             text_auto=True
         )
         st.plotly_chart(fig, use_container_width=True)
-    
+
+"""
+- Stay (Safe Zone) → p\geq < 0.4
+- Can Leave (Borderline Zone) → 0.4\leq p<0.7
+- Must Leave (Risk Zone) → p > 0.7
+"""
 with col2:
     if st.button('Predict'):
         df = pd.DataFrame([final_inputs])
@@ -168,28 +173,43 @@ with col2:
             predict = model_lg.predict(df)
             predict_proba = model_lg.predict_proba(df)[0, 1]
             
-            if predict_proba >= 0.45:
-                st.warning(f'Employee can leave the organization with attrition rate of {predict_proba:.2%}')
+            if predict_proba <= 0.40:
+                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
+            elif predict_proba > 0.40 and predict_proba <= 0.70:
+                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
             else:
-                st.success(f'Employee can continue in the organization with attrition rate of {predict_proba:.2%}')
+                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
         
         if model_box == 'Decision Tree':
             predict = model_dt.predict(df)
             predict_proba = model_dt.predict_proba(df)[0, 1]
             
-            if predict_proba >= 0.45:
-                st.warning(f'Employee can leave the organization with attrition rate of {predict_proba:.2%}')
+            if predict_proba <= 0.40:
+                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
+            elif predict_proba > 0.40 and predict_proba <= 0.70:
+                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
             else:
-                st.success(f'Employee can continue in the organization with attrition rate of {predict_proba:.2%}')
+                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
         
         if model_box == 'Random Forest':
             predict = model_rf.predict(df)
             predict_proba = model_rf.predict_proba(df)[0, 1]
             
-            if predict_proba >= 0.45:
-                st.warning(f'Employee can leave the organization with attrition rate of {predict_proba:.2%}')
+            if predict_proba <= 0.40:
+                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
+            elif predict_proba > 0.40 and predict_proba <= 0.70:
+                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
             else:
-                st.success(f'Employee can continue in the organization with attrition rate of {predict_proba:.2%}')
+                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
             
         if model_box == 'Catboost':
             df = df[['Age', 'Business_Travel', 'Department', 'Distance_From_Home',
@@ -202,10 +222,15 @@ with col2:
             predict = model_cat.predict(df)
             predict_proba = model_cat.predict_proba(df)[0, 1]
             
-            if predict >= 0.45:
-                st.warning(f'Employee can leave the organization with attrition rate of {predict_proba:.2%}')
+            if predict_proba <= 0.40:
+                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
+            elif predict_proba > 0.40 and predict_proba <= 0.70:
+                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
             else:
-                st.success(f'Employee can continue in the organization with attrition rate of {predict_proba:.2%}')
+                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
+                st.write(f'Attrition_rate: {predict_proba:.2%}')
         
         st.write(final_inputs)
         
@@ -213,6 +238,7 @@ with col2:
         
 
         
+
 
 
 
