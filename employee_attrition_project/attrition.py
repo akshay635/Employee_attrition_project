@@ -62,7 +62,7 @@ st.sidebar.markdown(
 )
 
 age = st.sidebar.number_input("Age", min_value=18, max_value=63)
-salary = st.sidebar.number_input("Salary", min_value=30000, max_value=200000)
+salary = st.sidebar.slider("Salary", min_value=30000, max_value=200000)
 ship = st.sidebar.slider("Salary Hike(%)", 0, 100)
 wlb = st.sidebar.number_input('Work-Life balance', min_value=1, max_value=5, step=1)
 yslp = st.sidebar.number_input('Years since last promotion', min_value=0, max_value=10, step=1)
@@ -213,6 +213,7 @@ with col2:
         
 
         
+
 
 
 
