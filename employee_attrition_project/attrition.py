@@ -44,11 +44,10 @@ def load_models():
 lg_df, rf_df, dt_df, cat_df = load_data()
 model_lg, model_rf, model_dt, model_cat = load_models()
 
-common_features = ['Work_life_balance', 'Years_since_last_promotion', 
-                   'Distance_From_Home', 'Job_Involvement',
-                   'Environment_Satisfaction', 'Job_Satisfaction',
-                   'Job_Level', 'Number_of_Companies_Worked_previously',
-                   'Business_Travel', 'Department', 'Job_Role', 'Overtime']
+common_features = ['Environment_Satisfaction', 'Salary_Hike_in_percent', 
+                   'Salary', 'Job_Involvement', 'Years_since_last_promotion',
+                   'Age', 'Overtime', 'Job_Satisfaction', 'Business_Travel',
+                   'Distance_From_Home', 'Work_life_balance' 'Department', 'Job_Role']
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
@@ -62,15 +61,15 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-
+age = st.sidebar.number_input("Age", min_value=18, max_value=63)
+salary = st.sidebar.number_input("Salary", min_value=30000, max_value=200000)
+ship = st.slider("Salary Hike(%)", 0, 100)
 wlb = st.sidebar.number_input('Work-Life balance', min_value=1, max_value=5, step=1)
 yslp = st.sidebar.number_input('Years since last promotion', min_value=0, max_value=10, step=1)
 dist_f_home = st.sidebar.number_input('Distance from Home location', min_value=0, max_value=50, step=1)
 job_inv = st.sidebar.number_input("Job involvement", min_value=1, max_value=5, step=1)
 env_sats = st.sidebar.number_input("Environment Satisfaction", min_value=1, max_value=5, step=1)
 job_sats = st.sidebar.number_input("Job Satisfaction", min_value=1, max_value=5, step=1)
-job_level = st.sidebar.number_input("Job level", min_value=1, max_value=8, step=1)
-nocwp = st.sidebar.number_input("No. of Companies worked previously", min_value=0, max_value=8, step=1)
 bt = st.sidebar.radio('Business Travel', options=['Travel Rarely', 'No Travel', 'Travel Frequently'])
 dept = st.sidebar.selectbox('Department', ['Software Development', 'Cyber Security', 'Data Science',
                                            'Network Administration', 'IT Services'])
@@ -80,14 +79,15 @@ job_role = st.sidebar.selectbox('Job Role', ['Developer', 'Software Engineer', '
 
 overtime = st.sidebar.radio('Overtime', ['Yes', 'No'])
 
-inputs = {'Work_life_balance': wlb, 
+inputs = {'Age': age,
+          'Salary': salary,
+          'Salary_Hike_in_percent': ship,
+          'Work_life_balance': wlb, 
           'Years_since_last_promotion': yslp, 
           'Distance_From_Home': dist_f_home, 
           'Job_Involvement': job_inv,
           'Environment_Satisfaction': env_sats, 
           'Job_Satisfaction': job_sats,
-          'Job_Level': job_level, 
-          'Number_of_Companies_Worked_previously': nocwp,
           'Business_Travel': bt, 
           'Department': dept, 
           'Job_Role': job_role, 
@@ -213,4 +213,5 @@ with col2:
         
 
         
+
 
