@@ -1,11 +1,12 @@
-['Environment_Satisfaction',
- 'Salary_Hike_in_percent',
+['Business_Travel',
+ 'Work_life_balance',
+ 'Environment_Satisfaction',
+ 'Job_Satisfaction',
+ 'Age',
+ 'Years_since_last_promotion',
  'Salary',
  'Job_Involvement',
- 'Years_since_last_promotion',
- 'Age',
+ 'Salary_Hike_in_percent',
  'Overtime',
- 'Job_Satisfaction',
- 'Business_Travel',
- 'Distance_From_Home',
- 'Work_life_balance']
+ 'Distance_From_Home']
+
