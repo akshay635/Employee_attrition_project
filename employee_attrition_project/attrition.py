@@ -61,7 +61,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
-employee_ID = st.sidebar.number_input('Please enter Employee ID')
+employee_ID = st.sidebar.text_input('Please enter Employee ID')
 age = st.sidebar.number_input("Age", min_value=18, max_value=63)
 salary = st.sidebar.slider("Salary", min_value=30000, max_value=200000)
 ship = st.sidebar.slider("Salary Hike(%)", 0, 100)
@@ -153,6 +153,7 @@ with col2:
         
 
         
+
 
 
 
