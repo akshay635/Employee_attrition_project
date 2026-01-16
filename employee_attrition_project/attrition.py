@@ -139,20 +139,21 @@ with col2:
         predict = model_rf.predict(df)
         predict_proba = model_rf.predict_proba(df)[0, 1]
         if predict_proba < 0.40:
-            st.success(f'Employee will stay in the organization with the risk score of {predict_proba:.2%}')
-            st.write(f'Attrition_rate: {predict_proba:.2%}')
+            st.success(f'Employee is likely to stay with a low attrition risk score of {predict_proba:.2%}')
+            st.write(f'Attrition rate: {predict_proba:.2%}')
         elif predict_proba >= 0.40 and predict_proba < 0.65:
-            st.warning(f'Employee can leave the organization with the risk score of {predict_proba:.2%}')
-            st.write(f'Attrition_rate: {predict_proba:.2%}')
+            st.warning(f'Employee has a moderate risk of leaving with a score of {predict_proba:.2%}')
+            st.write(f'Attrition rate: {predict_proba:.2%}')
         else:
-            st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
-            st.write(f'Attrition_rate: {predict_proba:.2%}')
+            st.error(f'Employee is at high risk of leaving with a probability of {predict_proba:.2%}')
+            st.write(f'Attrition rate: {predict_proba:.2%}')
             
         
         
         
 
         
+
 
 
 
