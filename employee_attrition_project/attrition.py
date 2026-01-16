@@ -61,6 +61,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True
 )
 
+employee_ID = st.sidebar.number_input('Please enter Employee ID')
 age = st.sidebar.number_input("Age", min_value=18, max_value=63)
 salary = st.sidebar.slider("Salary", min_value=30000, max_value=200000)
 ship = st.sidebar.slider("Salary Hike(%)", 0, 100)
@@ -138,10 +139,10 @@ with col2:
         predict = model_rf.predict(df)
         predict_proba = model_rf.predict_proba(df)[0, 1]
         if predict_proba < 0.40:
-            st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
+            st.success(f'Employee will stay in the organization with the risk score of {predict_proba:.2%}')
             st.write(f'Attrition_rate: {predict_proba:.2%}')
         elif predict_proba >= 0.40 and predict_proba < 0.65:
-            st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
+            st.warning(f'Employee can leave the organization with the risk score of {predict_proba:.2%}')
             st.write(f'Attrition_rate: {predict_proba:.2%}')
         else:
             st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
@@ -152,6 +153,7 @@ with col2:
         
 
         
+
 
 
 
