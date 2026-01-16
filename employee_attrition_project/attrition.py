@@ -112,54 +112,20 @@ baseline.update(modes)
 final_inputs = baseline.copy()
 final_inputs.update(inputs)
 
-model_box = st.selectbox('Choose a model', ['Logistic Regression', 'Catboost', 'Random Forest', 'Decision Tree'])
+#model_box = st.selectbox('Choose a model', ['Logistic Regression', 'Catboost', 'Random Forest', 'Decision Tree'])
 
 col1, col2 = st.columns(2)
 
 with col1:
-    if model_box == "Logistic Regression":
-        # ---------------- Visualization ----------------
-        fig = px.bar(
-            lg_df.head(10).sort_values(by='importance', ascending=False),
-            x="importance",
-            y="feature",
-            title=f"Feature Importance / F-score ({model_box})",
-            text_auto=True
-        )
-        st.plotly_chart(fig, use_container_width=True)
-    
-    if model_box == 'Decision Tree':
-        # ---------------- Visualization ----------------
-        fig = px.bar(
-            dt_df.head(10).sort_values(by='importance', ascending=False),
-            x="importance",
-            y="feature",
-            title=f"Feature Importance / F-score ({model_box})",
-            text_auto=True
-        )
-        st.plotly_chart(fig, use_container_width=True)
-        
-    if model_box == 'Random Forest':
-        # ---------------- Visualization ----------------
-        fig = px.bar(
+    # ---------------- Visualization ----------------
+    fig = px.bar(
             rf_df.head(10).sort_values(by='importance', ascending=False),
             x="importance",
             y="feature",
             title=f"Feature Importance / F-score ({model_box})",
             text_auto=True
-        )
-        st.plotly_chart(fig, use_container_width=True)
-        
-    if model_box == 'Catboost':
-        # ---------------- Visualization ----------------
-        fig = px.bar(
-            cat_df.head(10).sort_values(by='importance', ascending=False),
-            x="importance",
-            y="feature",
-            title=f"Feature Importance / F-score ({model_box})",
-            text_auto=True
-        )
-        st.plotly_chart(fig, use_container_width=True)
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 """
 - Stay (Safe Zone) → p\geq < 0.4
@@ -169,75 +135,24 @@ with col1:
 with col2:
     if st.button('Predict'):
         df = pd.DataFrame([final_inputs])
-        if model_box == 'Logistic Regression':
-            predict = model_lg.predict(df)
-            predict_proba = model_lg.predict_proba(df)[0, 1]
+        predict = model_rf.predict(df)
+        predict_proba = model_rf.predict_proba(df)[0, 1]
+        if predict_proba < 0.40:
+            st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
+            st.write(f'Attrition_rate: {predict_proba:.2%}')
+        elif predict_proba >= 0.40 and predict_proba < 0.65:
+            st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
+            st.write(f'Attrition_rate: {predict_proba:.2%}')
+        else:
+            st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
+            st.write(f'Attrition_rate: {predict_proba:.2%}')
             
-            if predict_proba <= 0.40:
-                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            elif predict_proba > 0.40 and predict_proba <= 0.70:
-                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            else:
-                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-        
-        if model_box == 'Decision Tree':
-            predict = model_dt.predict(df)
-            predict_proba = model_dt.predict_proba(df)[0, 1]
-            
-            if predict_proba <= 0.40:
-                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            elif predict_proba > 0.40 and predict_proba <= 0.70:
-                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            else:
-                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-        
-        if model_box == 'Random Forest':
-            predict = model_rf.predict(df)
-            predict_proba = model_rf.predict_proba(df)[0, 1]
-            
-            if predict_proba <= 0.40:
-                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            elif predict_proba > 0.40 and predict_proba <= 0.70:
-                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            else:
-                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            
-        if model_box == 'Catboost':
-            df = df[['Age', 'Business_Travel', 'Department', 'Distance_From_Home',
-                      'Education', 'Environment_Satisfaction', 'Gender', 'Salary',
-                      'Job_Involvement', 'Job_Level', 'Job_Role', 'Job_Satisfaction',
-                      'Marital_Status', 'Number_of_Companies_Worked_previously', 
-                      'Overtime', 'Salary_Hike_in_percent', 'Total_working_years_experience',
-                      'Work_life_balance', 'No_of_years_worked_at_current_company',
-                      'No_of_years_in_current_role', 'Years_since_last_promotion']]
-            predict = model_cat.predict(df)
-            predict_proba = model_cat.predict_proba(df)[0, 1]
-            
-            if predict_proba <= 0.40:
-                st.success(f'Employee will stay in the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            elif predict_proba > 0.40 and predict_proba <= 0.70:
-                st.warning(f'Employee is thinking of leaving the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-            else:
-                st.error(f'Employee must leave the organization with the probability of {predict_proba:.2%}')
-                st.write(f'Attrition_rate: {predict_proba:.2%}')
-        
-        st.write(final_inputs)
         
         
         
 
         
+
 
 
 
