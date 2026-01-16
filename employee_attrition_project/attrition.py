@@ -123,7 +123,7 @@ with col1:
             rf_df.head(10).sort_values(by='importance', ascending=False),
             x="importance",
             y="feature",
-            title=f"Feature Importance / F-score ({model_box})",
+            title=f"Feature Importance / F-score (Random Forest)",
             text_auto=True
     )
     st.plotly_chart(fig, use_container_width=True)
@@ -153,6 +153,7 @@ with col2:
         
 
         
+
 
 
 
