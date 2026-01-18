@@ -8,8 +8,10 @@ plotly==6.5.0
 catboost   
 joblib
 json5
+shap<0.50
 
               
+
 
 
 
