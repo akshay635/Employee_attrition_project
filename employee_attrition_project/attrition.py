@@ -12,7 +12,7 @@ import numpy as np
 import plotly.express as px
 import joblib
 import json
-
+import shap
 
 # Open and read the JSON file
 with open('employee_attrition_project/data/medians.json', 'r') as file:
@@ -183,12 +183,23 @@ with col2:
         else:
             st.error(f'Employee is at high risk of leaving with a probability of {predict_proba:.2%}')
             st.write(f'Attrition rate: {predict_proba:.2%}')
-            
+
+        st.text("SHAP explanations")
+        preprocessor = model_rf.named_steps["preprocessing"]
+        rf_model = model_rf.named_steps["rf_bal"]
+        df_pre = preprocessor.transform(df)
+        new_df = pd.DataFrame(df_pre, columns=preprocessor.get_feature_names_out())
+        exp = shap.TreeExplainer(rf_model, feature_perturbation="tree_path_dependent")
+        shap_values = exp(new_df)
+        fig, ax = plt.subplots()
+        shap.plots.bar(shap_values[0, :, 1], max_display=10)
+        st.pyplot(fig, use_container_width=True)
         
         
         
 
         
+
 
 
 
