@@ -10,6 +10,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import matplotlib.pyplot as plt
 import joblib
 import json
 import shap
@@ -199,6 +200,7 @@ with col2:
         
 
         
+
 
 
 
