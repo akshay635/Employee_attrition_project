@@ -151,55 +151,57 @@ final_inputs.update(inputs)
 
 col1, col2 = st.columns(2)
 
-with col1:
+if st.button('Predict'):
+    with col1:
     # ---------------- Visualization ----------------
     # feature importance scores
-    fig = px.bar(
+        fig = px.bar(
             rf_df.head(10).sort_values(by='importance', ascending=False),
             x="importance",
             y="feature",
             title=f"Feature Importance / F-score (Random Forest)",
             text_auto=True
-    )
-    st.plotly_chart(fig, use_container_width=True)
+        )
+        st.plotly_chart(fig, use_container_width=True)
 
-"""
-- Stay (Safe Zone) → <35%
-- Can Leave (Borderline Zone) → 35%-65%
-- Must Leave (Risk Zone) → >65%
-"""
+        """
+        - Stay (Safe Zone) → <35%
+        - Can Leave (Borderline Zone) → 35%-65%
+        - Must Leave (Risk Zone) → >65%
+        """
 
-# estimating the probability of employee attrition rate with threshold settings
-with col2:
-    if st.button('Predict'):
-        df = pd.DataFrame([final_inputs])
-        predict = model_rf.predict(df)
-        predict_proba = model_rf.predict_proba(df)[0, 1]
-        if predict_proba < 0.35:
-            st.success(f'Employee is likely to stay with a low attrition risk score of {predict_proba:.2%}')
-            st.write(f'Attrition rate: {predict_proba:.2%}')
-        elif predict_proba >= 0.35 and predict_proba < 0.65:
-            st.warning(f'Employee has a moderate risk of leaving with a score of {predict_proba:.2%}')
-            st.write(f'Attrition rate: {predict_proba:.2%}')
-        else:
-            st.error(f'Employee is at high risk of leaving with a probability of {predict_proba:.2%}')
-            st.write(f'Attrition rate: {predict_proba:.2%}')
-
-        st.text("SHAP explanations")
-        preprocessor = model_rf.named_steps["preprocessing"]
-        rf_model = model_rf.named_steps["rf_bal"]
-        df_pre = preprocessor.transform(df)
-        new_df = pd.DataFrame(df_pre, columns=preprocessor.get_feature_names_out())
-        exp = shap.TreeExplainer(rf_model, feature_perturbation="tree_path_dependent")
-        shap_values = exp(new_df)
-        fig, ax = plt.subplots()
-        shap.plots.bar(shap_values[0, :, 1], max_display=10)
-        st.pyplot(fig, use_container_width=True)
+    # estimating the probability of employee attrition rate with threshold settings
+    with col2:
+        if st.button('Predict'):
+            df = pd.DataFrame([final_inputs])
+            predict = model_rf.predict(df)
+            predict_proba = model_rf.predict_proba(df)[0, 1]
+            if predict_proba < 0.35:
+                st.success(f'Employee is likely to stay with a low attrition risk score of {predict_proba:.2%}')
+                st.write(f'Attrition rate: {predict_proba:.2%}')
+            elif predict_proba >= 0.35 and predict_proba < 0.65:
+                st.warning(f'Employee has a moderate risk of leaving with a score of {predict_proba:.2%}')
+                st.write(f'Attrition rate: {predict_proba:.2%}')
+            else:
+                st.error(f'Employee is at high risk of leaving with a probability of {predict_proba:.2%}')
+                st.write(f'Attrition rate: {predict_proba:.2%}')
+    
+            st.text("SHAP explanations")
+            preprocessor = model_rf.named_steps["preprocessing"]
+            rf_model = model_rf.named_steps["rf_bal"]
+            df_pre = preprocessor.transform(df)
+            new_df = pd.DataFrame(df_pre, columns=preprocessor.get_feature_names_out())
+            exp = shap.TreeExplainer(rf_model, feature_perturbation="tree_path_dependent")
+            shap_values = exp(new_df)
+            fig, ax = plt.subplots()
+            shap.plots.bar(shap_values[0, :, 1], max_display=10)
+            st.pyplot(fig, use_container_width=True)
         
         
         
 
         
+
 
 
 
