@@ -172,7 +172,6 @@ if st.button('Predict'):
 
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
-        if st.button('Predict'):
             df = pd.DataFrame([final_inputs])
             predict = model_rf.predict(df)
             predict_proba = model_rf.predict_proba(df)[0, 1]
@@ -201,6 +200,7 @@ if st.button('Predict'):
         
 
         
+
 
 
 
