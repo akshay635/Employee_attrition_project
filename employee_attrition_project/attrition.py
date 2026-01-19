@@ -75,6 +75,7 @@ age = st.sidebar.number_input("Age", min_value=18, max_value=63)
 
 # Salary
 salary = st.sidebar.slider("Salary", min_value=30,000, max_value=2,00,000)
+salary = int(salary.replace(',', '')
 
 # Salary Hike in percent
 ship = st.sidebar.slider("Salary Hike(%)", 0, 100)
@@ -164,9 +165,9 @@ with col1:
     st.plotly_chart(fig, use_container_width=True)
 
 """
-- Stay (Safe Zone) → p\geq < 0.4
-- Can Leave (Borderline Zone) → 0.4\leq p<0.7
-- Must Leave (Risk Zone) → p > 0.7
+- Stay (Safe Zone) → <35%
+- Can Leave (Borderline Zone) → 35%-65%
+- Must Leave (Risk Zone) → >65%
 """
 
 # estimating the probability of employee attrition rate with threshold settings
@@ -200,6 +201,7 @@ with col2:
         
 
         
+
 
 
 
