@@ -74,7 +74,7 @@ employee_ID = st.sidebar.text_input('Please enter Employee ID')
 age = st.sidebar.number_input("Age", min_value=18, max_value=63)
 
 # Salary
-salary = st.sidebar.slider("Salary", min_value=30000, max_value=200000)
+salary = st.sidebar.slider("Salary", min_value=30,000, max_value=2,00,000)
 
 # Salary Hike in percent
 ship = st.sidebar.slider("Salary Hike(%)", 0, 100)
@@ -200,6 +200,7 @@ with col2:
         
 
         
+
 
 
 
