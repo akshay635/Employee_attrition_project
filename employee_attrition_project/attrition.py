@@ -184,7 +184,7 @@ with col1:
 
 # estimating the probability of employee attrition rate with threshold settings
 with col2:
-    st.text("SHAP explanations")
+    st.subheader("SHAP explanations")
     preprocessor = model_rf.named_steps["preprocessing"]
     rf_model = model_rf.named_steps["rf_bal"]
     df_pre = preprocessor.transform(df)
@@ -199,6 +199,7 @@ with col2:
         
 
         
+
 
 
 
