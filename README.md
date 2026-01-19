@@ -12,7 +12,7 @@ Employee Attrition detection.
 ~Designed and HR-facing application that accepts new employee survey inputs and generates and generates the real-time attrition risk scores and risk buckets (high/medium/low) to support targeted interventions.
 
 ~Thresholds set:-
-Low:- <35%
+Low:- <35% 
 Medium:- 35%-65%
 High:- >65%
 
