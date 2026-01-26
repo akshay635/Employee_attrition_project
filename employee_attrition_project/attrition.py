@@ -184,8 +184,8 @@ with col1:
 
 # estimating the probability of employee attrition rate with threshold settings
 with col2:
-    st.subheader("SHAP explanations", )
-    st.text('Features contributions which decides the final outcome is shown using bar plot')
+    st.subheader("SHAP explanations")
+    st.text('Features contributions which decides the final outcome.')
     preprocessor = model_rf.named_steps["preprocessing"]
     rf_model = model_rf.named_steps["rf_bal"]
     df_pre = preprocessor.transform(df)
@@ -200,6 +200,7 @@ with col2:
         
 
         
+
 
 
 
