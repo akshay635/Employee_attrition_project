@@ -174,6 +174,7 @@ if st.button('Predict'):
             title=f"Feature Importance / F-score (Random Forest)",
             text_auto=True
         )
+        fig.update_layout(yaxis=dict(autorange="reversed"))
         st.plotly_chart(fig, use_container_width=True)
 
         """
@@ -200,6 +201,7 @@ if st.button('Predict'):
         
 
         
+
 
 
 
