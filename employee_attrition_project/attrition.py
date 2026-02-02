@@ -196,14 +196,15 @@ if st.button('Predict'):
         fig, ax = plt.subplots()
         shap.plots.bar(shap_values[0, :, 1], max_display=10)
         st.pyplot(fig, use_container_width=True)
-        st.caption("Features with the red bar are pulling the employee towards the risk of 
+        st.caption("""Features with the red bar are pulling the employee towards the risk of 
                     leaving the organization whereas features with the blue bar are pulling 
-                    the employee towards organization stay.")
+                    the employee towards organization stay.""")
         
         
         
 
         
+
 
 
 
