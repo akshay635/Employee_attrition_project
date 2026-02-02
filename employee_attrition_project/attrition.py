@@ -186,9 +186,7 @@ if st.button('Predict'):
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
         st.subheader("SHAP explanations")
-        st.text("""Features contributions which decides the final outcome. Features with the red bar 
-                   are pulling the employee towards the risk of leaving the organization whereas features 
-                   with the blue bar are pulling the employee towards organization stay.""")
+        st.text("Features contributions which decides the final outcome.")
         preprocessor = model_rf.named_steps["preprocessing"]
         rf_model = model_rf.named_steps["rf_bal"]
         df_pre = preprocessor.transform(df)
@@ -198,11 +196,15 @@ if st.button('Predict'):
         fig, ax = plt.subplots()
         shap.plots.bar(shap_values[0, :, 1], max_display=10)
         st.pyplot(fig, use_container_width=True)
+        st.caption("Features with the red bar are pulling the employee towards the risk of 
+                    leaving the organization whereas features with the blue bar are pulling 
+                    the employee towards organization stay.")
         
         
         
 
         
+
 
 
 
