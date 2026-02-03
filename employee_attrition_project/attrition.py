@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jan 12 13:58:50 2026
-
-@author: aksha
-"""
-
 # Importing required modules
 import streamlit as st
 import pandas as pd
@@ -203,6 +197,7 @@ if st.button('Predict'):
         
 
         
+
 
 
 
