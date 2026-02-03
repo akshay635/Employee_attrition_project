@@ -66,12 +66,13 @@ if st.button('Predict'):
     with col1:
         # ---------------- Visualization ----------------
         # feature importance scores
-        Feature_Importance(df)
+        Feature_Importance(rf_df)
 
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
         SHAP_explanations(model_rf, df)
         
+
 
 
 
