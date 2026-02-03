@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import streamlit as st
-import config
+import importlib
+import src.config as config
+importlib.reload(config)
 def load_user_inputs():
-    
     # Employee ID
     employee_ID = st.sidebar.text_input('Please enter Employee ID')
     
@@ -65,4 +66,5 @@ def load_user_inputs():
               'Overtime': overtime
               }
     
+
     return inputs
