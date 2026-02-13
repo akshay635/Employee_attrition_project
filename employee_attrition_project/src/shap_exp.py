@@ -1,5 +1,8 @@
 import pandas as pd
 from collections import defaultdict
+import importlib
+import src.config as config
+importlib.reload(config)
 
 class ShapCollapser:
     def __init__(self, encoded_feature_names, class_index=1):
@@ -10,9 +13,9 @@ class ShapCollapser:
         """
         self.encoded_feature_names = encoded_feature_names
         self.class_index = class_index
-        self.groups = self._group_encoded_features(encoded_feature_names)
+        self.groups = self._group_encoded_features(encoded_feature_names, config.COMMON_FEATURES)
 
-    def _group_encoded_features(self, encoded_feature_names):
+    def _group_encoded_features(self, encoded_feature_names, original_features):
         """
         Group encoded feature names by their original base feature.
         Handles ColumnTransformer prefixes like 'cat__'.
