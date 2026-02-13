@@ -76,8 +76,35 @@ if st.button('Predict'):
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
         shap_values, encoded_features = SHAP_explanations(model_rf, df)
+        collapser = ShapCollapser(encoded_features, class_index=1)
+
+        # Collapse SHAP values
+        shap_df_collapsed = collapser.collapse(shap_values)
+
+        # Convert back into SHAP Explanation object for plotting
+        collapsed_values = shap_df_collapsed.values
+        collapsed_feature_names = shap_df_collapsed.columns.tolist()
+        
+        # Wrap into a SHAP Explanation
+        collapsed_explanation = shap.Explanation(
+            values=collapsed_values,
+            base_values=shap_values.base_values,   # reuse from original
+            data=None,                             # optional: original input data
+            feature_names=collapsed_feature_names
+        )
+
+        fig, ax = plt.subplots()
+        shap.plots.bar(collapsed_explanation, max_display=10)
+        st.pyplot(fig, use_container_width=True)
+        st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
+                       while features shown in blue increase the likelihood of the employee staying.""")
+        
         with st.expander('Feature explanations using SHAP'):
-            st.dataframe(collapse_shap_values(shap_values, encoded_features, config.COMMON_FEATURES))
+            st.subheader("Top 5 features insights:")
+            # Generate recruiter-friendly narrative
+            st.markdown(collapser.explain(shap_values, top_n=3))
+            #st.dataframe(shap_df_collapsed.head())
+            #st.dataframe(collapse_shap_values(shap_values, encoded_features, config.COMMON_FEATURES))
 
     
 
@@ -88,6 +115,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
