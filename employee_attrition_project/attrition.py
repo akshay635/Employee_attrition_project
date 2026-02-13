@@ -11,6 +11,7 @@ from src.user_inputs import load_user_inputs
 from src.final_user_data import final_inputs
 from src.model_explanation import Feature_Importance, SHAP_explanations
 from src.insights import generate_feature_insight 
+from src.model_explanation import collapse_shap_values
 
 # Open and read the JSON file
 with open(config.MEDIANS_PATH, 'r') as file:
@@ -74,8 +75,20 @@ if st.button('Predict'):
 
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
-        SHAP_explanations(model_rf, df)
+        shap_values, encoded_features = SHAP_explanations(model_rf, df)
+        with st.expander('Feature explanations using SHAP'):
+            st.dataframe(collapse_shap_values(shap_values, encoded_features, config.COMMON_FEATURES))
+
+    
+
+
+
+
+
+
+
         
+
 
 
 
