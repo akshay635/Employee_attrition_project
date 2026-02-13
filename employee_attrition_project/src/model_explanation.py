@@ -18,8 +18,7 @@ def Feature_Importance(df):
     )
     fig.update_layout(yaxis=dict(autorange="reversed"))
     st.plotly_chart(fig, use_container_width=True)
-
-    importances = df['importance']
+    importances = df.copy()
     """
     - Stay (Safe Zone) → <35%
     - Can Leave (Borderline Zone) → 35%-65%
@@ -46,5 +45,6 @@ def SHAP_explanations(model, df):
                    while features shown in blue increase the likelihood of the employee staying.""")
 
     
+
 
 
