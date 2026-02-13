@@ -61,15 +61,10 @@ def SHAP_explanations(model, df):
     new_df = pd.DataFrame(df_pre, columns=preprocessor.get_feature_names_out())
     exp = shap.TreeExplainer(rf_model, feature_perturbation="tree_path_dependent")
     shap_values = exp(new_df)
-    fig, ax = plt.subplots()
-    shap.plots.bar(shap_values[0, :, 1], max_display=10)
-    st.pyplot(fig, use_container_width=True)
-    st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
-                   while features shown in blue increase the likelihood of the employee staying.""")
-    
     return shap_values, encoded_features
 
     
+
 
 
 
