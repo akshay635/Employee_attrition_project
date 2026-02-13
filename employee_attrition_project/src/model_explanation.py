@@ -39,7 +39,7 @@ def collapse_shap_values(shap_values, encoded_feature_names, original_features):
     Returns:
     - shap_df_collapsed: DataFrame with SHAP values grouped by original features
     """
-    shap_df = pd.DataFrame(shap_values.values, columns=encoded_feature_names)
+    shap_df = pd.DataFrame(shap_values.values[:, :, 1], columns=encoded_feature_names)
 
     # Collapse each categorical feature
     for i, feature in enumerate(original_features):
@@ -70,6 +70,7 @@ def SHAP_explanations(model, df):
     return shap_values, encoded_features
 
     
+
 
 
 
