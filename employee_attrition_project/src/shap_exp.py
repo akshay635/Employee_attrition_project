@@ -69,7 +69,7 @@ class ShapCollapser:
             narrative += f"- {feat}: contribution {val:.3f}\n"
         return narrative
 
-    def plot_signed_bar(self, shap_values, class_index=None, top_n=10):
+    def plot_signed_bar(self, shap_values, class_index, top_n=10):
         """
         Plot average SHAP contributions with red (positive → class 1) and blue (negative → class 0).
         """
