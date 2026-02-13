@@ -10,6 +10,7 @@ from src.load_data_and_models import load_data, load_models
 from src.user_inputs import load_user_inputs
 from src.final_user_data import final_inputs
 from src.model_explanation import Feature_Importance, SHAP_explanations
+from src.insights import generate_feature_insight 
 
 # Open and read the JSON file
 with open(config.MEDIANS_PATH, 'r') as file:
@@ -67,11 +68,15 @@ if st.button('Predict'):
         # ---------------- Visualization ----------------
         # feature importance scores
         Feature_Importance(rf_df)
+        with st.expander('Features in global feature importances'):
+            st.subheader('Top 5 Features insights:')
+            st.markdown(generate_feature_insight(rf_df))
 
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
         SHAP_explanations(model_rf, df)
         
+
 
 
 
