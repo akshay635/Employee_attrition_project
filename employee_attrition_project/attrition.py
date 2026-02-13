@@ -89,14 +89,14 @@ if st.button('Predict'):
         
         # Wrap into a SHAP Explanation
         collapsed_explanation = shap.Explanation(
-            values=collapsed_values,
-            base_values=shap_values.base_values,   # reuse from original
+            values=collapsed_values[0],
+            base_values=shap_values.base_values[0],   # reuse from original
             data=None,                             # optional: original input data
             feature_names=collapsed_feature_names
         )
 
         fig, ax = plt.subplots()
-        shap.plots.bar(collapsed_explanation, max_display=10)
+        shap.plots.bar(collapsed_explanation[:, 1], max_display=10)
         st.pyplot(fig, use_container_width=True)
         st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
                        while features shown in blue increase the likelihood of the employee staying.""")
@@ -117,6 +117,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
