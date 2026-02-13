@@ -73,7 +73,7 @@ class ShapCollapser:
         """
         Plot average SHAP contributions with red (positive → class 1) and blue (negative → class 0).
         """
-        shap_df = self.collapse(shap_values, class_index=class_index)
+        shap_df = self.collapse(shap_values)
         mean_contrib = shap_df.mean().sort_values()
 
         colors = ['red' if val > 0 else 'blue' for val in mean_contrib]
