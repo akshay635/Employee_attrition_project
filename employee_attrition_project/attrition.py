@@ -69,13 +69,13 @@ if st.button('Predict'):
         # feature importance scores
         Feature_Importance(rf_df)
         with st.expander('Features in global feature importances'):
-            st.subheader('Top 5 Features insights:')
             st.markdown(generate_feature_insight(rf_df))
 
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
         SHAP_explanations(model_rf, df)
         
+
 
 
 
