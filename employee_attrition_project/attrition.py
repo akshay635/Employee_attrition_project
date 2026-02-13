@@ -79,24 +79,13 @@ if st.button('Predict'):
     with col2:
         shap_values, encoded_features = SHAP_explanations(model_rf, df)
         collapser = ShapCollapser(encoded_features, class_index=1)
-
-        # Collapse SHAP values
-        shap_df_collapsed = collapser.collapse(shap_values)
-
-        # Convert back into SHAP Explanation object for plotting
-        collapsed_values = shap_df_collapsed.values
-        collapsed_feature_names = shap_df_collapsed.columns.tolist()
         
-        # Wrap into a SHAP Explanation
-        collapsed_explanation = shap.Explanation(
-            values=collapsed_values[0],
-            base_values=shap_values.base_values[0],   # reuse from original
-            data=None,                             # optional: original input data
-            feature_names=collapsed_feature_names
-        )
+        # Plot signed contributions for class 1
+        collapser.plot_signed_bar(shap_values, class_index=1, top_n=10)
 
+        # Plot signed contributions for class 1
         fig, ax = plt.subplots()
-        shap.plots.waterfall(collapsed_explanation[:, 1], max_display=10)
+        collapser.plot_signed_bar(shap_values, class_index=1, top_n=10)
         st.pyplot(fig, use_container_width=True)
         st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
                        while features shown in blue increase the likelihood of the employee staying.""")
@@ -117,6 +106,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
