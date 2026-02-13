@@ -4,7 +4,6 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 import shap
-from src.insights import generate_feature_insight
 
 def Feature_Importance(df):
     # ---------------- Visualization ----------------
@@ -23,10 +22,6 @@ def Feature_Importance(df):
     - Can Leave (Borderline Zone) → 35%-65%
     - Must Leave (Risk Zone) → >65%
     """
-    with st.expander('Features in global feature importances'):
-        st.subheader('Top 5 Features insights:')
-        st.markdown(generate_feature_insight(df))
-        
     
 def SHAP_explanations(model, df):
     st.subheader("SHAP explanations")
@@ -44,6 +39,7 @@ def SHAP_explanations(model, df):
                    while features shown in blue increase the likelihood of the employee staying.""")
 
     
+
 
 
 
