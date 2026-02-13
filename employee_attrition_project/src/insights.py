@@ -2,18 +2,18 @@ import pandas as pd
 import numpy as np
 import shap
 
-def generate_feature_insight(df, importances, top_n = 5):
+def generate_feature_insight(importances, top_n = 5):
     top_features = importances.sort_values(by='importance', ascending=False).head(top_n)
     lines = [f"### 🧠 Top {top_n} Feature Insights\n"]
 
     for _, row in top_features.iterrows():
         col = row['feature']
         imp = row['importance']
-        if col not in df.columns:
+        if col not in importances.columns:
             lines.append(f"- **{col}**: ⚠️ Not found in input data.")
             continue
 
-        series = df[col].dropna()
+        series = importances[col].dropna()
         if pd.api.types.is_numeric_dtype(series):
             if series.nunique() <= 1:
                 lines.append(f"- **{col}** (Importance: {imp:.2f}): Constant value → {series.iloc[0] if not series.empty else 'N/A'}")
