@@ -41,9 +41,11 @@ class ShapCollapser:
         """
         values = shap_values.values
         if values.ndim == 3:  # (n_samples, n_features, n_classes)
-            values = values[:, :, self.class_index]
+            zeros = values[:, :, 0]
+            ones = values[:, :, 1]
 
-        shap_df = pd.DataFrame(values, columns=self.encoded_feature_names)
+        shap_diff = ones - zeros
+        shap_df = pd.DataFrame(shap_diff, columns=self.encoded_feature_names)
 
         # Collapse each group
         for feature, cols in self.groups.items():
