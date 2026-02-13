@@ -23,6 +23,10 @@ def Feature_Importance(df):
     - Can Leave (Borderline Zone) → 35%-65%
     - Must Leave (Risk Zone) → >65%
     """
+    with st.expander('Features in global feature importances'):
+        st.subheader('Top 5 Features insights:')
+        
+        
     
 def SHAP_explanations(model, df):
     st.subheader("SHAP explanations")
@@ -38,4 +42,5 @@ def SHAP_explanations(model, df):
     st.pyplot(fig, use_container_width=True)
     st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
                    while features shown in blue increase the likelihood of the employee staying.""")
+
     
