@@ -46,7 +46,7 @@ def collapse_shap_values(shap_values, encoded_feature_names, original_features):
         # Get encoded columns for this feature
         encoded_cols = [col for col in encoded_feature_names if col.startswith('cat' + "__" + feature + '_')]
         if encoded_cols:
-            shap_df[feature] = shap_df[encoded_cols].sum(axis=1)
+            shap_df[feature] = shap_df[encoded_cols].sum(axis=0)
             shap_df.drop(columns=encoded_cols, inplace=True)
 
     return shap_df
@@ -70,6 +70,7 @@ def SHAP_explanations(model, df):
     return shap_values, encoded_features
 
     
+
 
 
 
