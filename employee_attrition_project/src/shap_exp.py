@@ -19,10 +19,16 @@ class ShapCollapser:
         """
         groups = defaultdict(list)
         for col in encoded_feature_names:
-            # Remove transformer prefix if present
+            # Step 1: remove transformer prefix if present
             after_prefix = col.split("__", 1)[1] if "__" in col else col
-            # Extract base feature before first underscore
-            base = after_prefix.rsplit("_", 1)[0]
+    
+            # Step 2: if original_features provided, check direct match
+            if original_features and after_prefix in original_features:
+                base = after_prefix
+            else:
+                # Step 3: collapse one-hot by taking everything before last underscore
+                base = after_prefix.rsplit("_", 1)[0] if "_" in after_prefix else after_prefix
+    
             groups[base].append(col)
         return groups
 
