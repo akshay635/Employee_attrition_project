@@ -18,7 +18,6 @@ def Feature_Importance(df):
     )
     fig.update_layout(yaxis=dict(autorange="reversed"))
     st.plotly_chart(fig, use_container_width=True)
-    importances = df.copy()
     """
     - Stay (Safe Zone) → <35%
     - Can Leave (Borderline Zone) → 35%-65%
@@ -26,7 +25,7 @@ def Feature_Importance(df):
     """
     with st.expander('Features in global feature importances'):
         st.subheader('Top 5 Features insights:')
-        st.markdown(generate_feature_insight(df, importances))
+        st.markdown(generate_feature_insight(df))
         
     
 def SHAP_explanations(model, df):
@@ -45,6 +44,7 @@ def SHAP_explanations(model, df):
                    while features shown in blue increase the likelihood of the employee staying.""")
 
     
+
 
 
 
