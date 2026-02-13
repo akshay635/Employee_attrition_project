@@ -4,6 +4,9 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 import shap
+import importlib
+import src.config as config
+importlib.reload(config)
 
 def Feature_Importance(df):
     # ---------------- Visualization ----------------
@@ -53,6 +56,7 @@ def SHAP_explanations(model, df):
     st.text("Features contributions which decides the final outcome.")
     preprocessor = model.named_steps["preprocessing"]
     rf_model = model.named_steps["rf_bal"]
+    encoded_features = preprocessor.get_feature_names_out()
     df_pre = preprocessor.transform(df)
     new_df = pd.DataFrame(df_pre, columns=preprocessor.get_feature_names_out())
     exp = shap.TreeExplainer(rf_model, feature_perturbation="tree_path_dependent")
@@ -62,8 +66,11 @@ def SHAP_explanations(model, df):
     st.pyplot(fig, use_container_width=True)
     st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
                    while features shown in blue increase the likelihood of the employee staying.""")
+    with st.expander('Feature explanations using SHAP'):
+        st.dataframe(collapse_shap_values(shap_values, encoded_features, config.COMMON_FEATURES))
 
     
+
 
 
 
