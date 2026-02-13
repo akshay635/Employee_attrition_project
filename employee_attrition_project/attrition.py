@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # Importing required modules
 import streamlit as st
 import pandas as pd
+import shap
 import json
 import importlib
 import src.config as config
@@ -12,6 +12,7 @@ from src.final_user_data import final_inputs
 from src.model_explanation import Feature_Importance, SHAP_explanations
 from src.insights import generate_feature_insight 
 from src.model_explanation import collapse_shap_values
+from src.shap_exp import ShapCollapser
 
 # Open and read the JSON file
 with open(config.MEDIANS_PATH, 'r') as file:
@@ -115,6 +116,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
