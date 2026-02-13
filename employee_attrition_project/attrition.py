@@ -79,9 +79,6 @@ if st.button('Predict'):
     with col2:
         shap_values, encoded_features = SHAP_explanations(model_rf, df)
         collapser = ShapCollapser(encoded_features, class_index=1)
-        
-        # Plot signed contributions for class 1
-        collapser.plot_signed_bar(shap_values, class_index=1, top_n=10)
 
         # Plot signed contributions for class 1
         fig, ax = plt.subplots()
@@ -106,6 +103,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
