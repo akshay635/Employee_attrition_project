@@ -1,5 +1,6 @@
 import pandas as pd
 from collections import defaultdict
+import matplotlib.pyplot as plt
 import importlib
 import src.config as config
 importlib.reload(config)
