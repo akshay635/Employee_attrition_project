@@ -3,7 +3,7 @@ import numpy as np
 import shap
 
 def generate_feature_insight(df, importances, top_n = 5):
-    top_features = importances.sort_values(by='Importances', ascending=False).head(top_n)
+    top_features = importances.sort_values(by='importance', ascending=False).head(top_n)
     lines = [f"### 🧠 Top {top_n} Feature Insights\n"]
 
     for _, row in top_features.iterrows():
