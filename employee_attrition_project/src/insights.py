@@ -7,8 +7,8 @@ def generate_feature_insight(df, importances, top_n = 5):
     lines = [f"### 🧠 Top {top_n} Feature Insights\n"]
 
     for _, row in top_features.iterrows():
-        col = row['Features']
-        imp = row['Importances']
+        col = row['feature']
+        imp = row['importance']
         if col not in df.columns:
             lines.append(f"- **{col}**: ⚠️ Not found in input data.")
             continue
