@@ -22,7 +22,7 @@ class ShapCollapser:
             # Remove transformer prefix if present
             after_prefix = col.split("__", 1)[1] if "__" in col else col
             # Extract base feature before first underscore
-            base = after_prefix.rsplit("_", 1)[1]
+            base = after_prefix.rsplit("_", 2)[1]
             groups[base].append(col)
         return groups
 
