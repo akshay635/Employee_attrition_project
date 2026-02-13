@@ -23,6 +23,31 @@ def Feature_Importance(df):
     - Must Leave (Risk Zone) → >65%
     """
     
+def collapse_shap_values(shap_values, encoded_feature_names, original_features):
+    """
+    Collapse one-hot encoded SHAP values back to original categorical features.
+
+    Parameters:
+    - shap_values: SHAP values object (shap.Explanation or array)
+    - encoded_feature_names: list of encoded feature names (from encoder.get_feature_names_out)
+    - encoder: fitted OneHotEncoder (or similar)
+    - original_features: list of original categorical feature names
+
+    Returns:
+    - shap_df_collapsed: DataFrame with SHAP values grouped by original features
+    """
+    shap_df = pd.DataFrame(shap_values.values, columns=encoded_feature_names)
+
+    # Collapse each categorical feature
+    for i, feature in enumerate(original_features):
+        # Get encoded columns for this feature
+        encoded_cols = [col for col in encoded_feature_names if col.startswith('cat' + "_" + feature)]
+        if encoded_cols:
+            shap_df[feature] = shap_df[encoded_cols].sum(axis=1)
+            shap_df.drop(columns=encoded_cols, inplace=True)
+
+    return shap_df
+    
 def SHAP_explanations(model, df):
     st.subheader("SHAP explanations")
     st.text("Features contributions which decides the final outcome.")
@@ -39,6 +64,7 @@ def SHAP_explanations(model, df):
                    while features shown in blue increase the likelihood of the employee staying.""")
 
     
+
 
 
 
