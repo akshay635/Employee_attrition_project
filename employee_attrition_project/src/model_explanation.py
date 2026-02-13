@@ -67,7 +67,10 @@ def SHAP_explanations(model, df):
     st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
                    while features shown in blue increase the likelihood of the employee staying.""")
 
+    return shap_values, encoded_features
+
     
+
 
 
 
