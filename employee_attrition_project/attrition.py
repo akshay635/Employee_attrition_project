@@ -53,7 +53,6 @@ final_inputs = final_inputs(inputs, medians, modes)
 # model_box = st.selectbox('Choose a model', ['Logistic Regression', 'Catboost', 'Random Forest', 'Decision Tree'])
 if st.button('Predict'):
     df = pd.DataFrame([final_inputs])
-    predict = model_rf.predict(df)
     predict_proba = model_rf.predict_proba(df)[0, 1]
     if predict_proba < 0.35:
         st.success(f'✅ Employee is likely to stay with a low attrition risk score of {predict_proba:.2%}')
@@ -103,6 +102,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
