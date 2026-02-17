@@ -32,7 +32,7 @@ common_features = config.COMMON_FEATURES
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
-st.title('Employee Attrition Prediction System')
+st.title('Employee Attrition Rate Estimator')
 
 st.sidebar.markdown(
     """
@@ -102,6 +102,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
