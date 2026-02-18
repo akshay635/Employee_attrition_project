@@ -82,7 +82,7 @@ if st.button('Predict'):
         # Plot signed contributions for class 1
         fig, ax = plt.subplots()
         collapser.plot_signed_bar(shap_values, class_index=1)
-        st.pyplot(fig, use_container_width=True)
+        st.pyplot(fig, use_container_width=False)
         st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
                        while features shown in blue increase the likelihood of the employee staying.""")
         
@@ -102,6 +102,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
