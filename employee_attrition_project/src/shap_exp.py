@@ -69,7 +69,7 @@ class ShapCollapser:
             narrative += f"- {feat}: contribution {val:.3f}\n"
         return narrative
 
-    def plot_signed_bar(self, shap_values, class_index, top_n=11):
+    def plot_signed_bar(self, shap_values, class_index, top_n=10):
         """
         Plot average SHAP contributions with red (positive → class 1) and blue (negative → class 0).
         """
@@ -78,7 +78,7 @@ class ShapCollapser:
 
         colors = ['red' if val > 0 else 'blue' for val in mean_contrib]
 
-        mean_contrib.tail(top_n).plot.barh(color=colors[-top_n:], figsize=(8,6))
+        mean_contrib.tail(top_n).plot.barh(color=colors[-top_n:], figsize=(14,12))
         plt.title("Average SHAP Contributions (Red → Class 1, Blue → Class 0)")
         plt.xlabel("Mean SHAP Value")
         plt.show()
