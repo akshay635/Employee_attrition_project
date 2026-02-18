@@ -1,0 +1,5 @@
+model,True Negatives,False Positives,False Negatives,True Positives,Accuracy,Precision,Recall(TPR),Risk rate (FNR),F1-score,threshold
+Random Forest,5495,2258,525,1722,0.72,0.43,0.77,23.36,0.55,0.45
+Logistic Regression,5104,2649,660,1587,0.67,0.37,0.71,29.37,0.49,0.45
+Decision Tree,5989,1764,746,1501,0.75,0.46,0.67,33.2,0.54,0.45
+Catboost,6501,1252,774,1473,0.8,0.54,0.66,34.45,0.59,0.45
