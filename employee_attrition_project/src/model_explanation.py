@@ -12,9 +12,9 @@ def Feature_Importance(df):
     # ---------------- Visualization ----------------
     # feature importance scores
     fig = px.bar(
-        df.head(10).sort_values(by='importance', ascending=False),
-        x="importance",
-        y="feature",
+        df.head(10).sort_values(by='Importances', ascending=False),
+        x="Importances",
+        y="Features",
         title="Feature Importance / F-score (Random Forest)",
         text_auto=True
     )
@@ -64,6 +64,7 @@ def SHAP_explanations(model, df):
     return shap_values, encoded_features
 
     
+
 
 
 
