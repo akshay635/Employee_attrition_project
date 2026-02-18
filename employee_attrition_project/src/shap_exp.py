@@ -78,7 +78,7 @@ class ShapCollapser:
 
         colors = ['red' if val > 0 else 'blue' for val in mean_contrib]
 
-        mean_contrib.tail(top_n).plot.barh(color=colors[:top_n], figsize=(10,6))
+        mean_contrib.tail(top_n).plot.barh(color=colors[-top_n:], figsize=(10,6))
         plt.title("Average SHAP Contributions (Red → Class 1, Blue → Class 0)")
         plt.xlabel("Mean SHAP Value")
         plt.show()
