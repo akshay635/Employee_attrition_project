@@ -80,6 +80,6 @@ class ShapCollapser:
 
         mean_contrib.tail(top_n).plot.barh(color=colors[-top_n:], figsize=(10,6))
         plt.title("Average SHAP Contributions (Red → Class 1, Blue → Class 0)")
-        plt.xlim(0, mean_contrib.max() * 1.1)
         plt.xlabel("Mean SHAP Value")
+        plt.autoscale()
         plt.show()
