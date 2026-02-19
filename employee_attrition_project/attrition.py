@@ -35,7 +35,7 @@ all_features = config.ALL_FEATURES
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
-st.title('Employee Attrition Risk Evaluator')
+st.title('Employee Attrition Risk Evaluator', text_alignment="center")
 
 st.sidebar.markdown(
     """
@@ -191,6 +191,7 @@ with tab2:
 
 
         
+
 
 
 
