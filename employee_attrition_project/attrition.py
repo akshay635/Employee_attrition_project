@@ -55,44 +55,44 @@ final_inputs = final_inputs(inputs, medians, modes)
 tab1, tab2 = st.tabs(['Single employee Prediction', 'Batch Prediction'])
 with tab1:
     if st.button('Predict'):
-    df = pd.DataFrame([final_inputs])
-    predict_proba = model_rf.predict_proba(df)[0, 1]
-    if predict_proba < 0.35:
-        st.success(f'✅ Employee is likely to stay with a low attrition risk score of {predict_proba:.2%}')
-        st.write(f'Attrition rate: {predict_proba:.2%}')
-    elif predict_proba >= 0.35 and predict_proba < 0.65:
-        st.warning(f'⚠️ Employee has a moderate risk of leaving the organization with a score of {predict_proba:.2%}')
-        st.write(f'Attrition rate: {predict_proba:.2%}')
-    else:
-        st.error(f'❌ Employee is at a high risk of leaving the organization with a probability of {predict_proba:.2%}')
-        st.write(f'Attrition rate: {predict_proba:.2%}')
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # ---------------- Visualization ----------------
-        # feature importance scores
-        Feature_Importance(rf_df)
-        with st.expander('Features in global feature importances'):
-            st.markdown("### 🧠 Top 5 Feature Insights\n")
-            st.dataframe(generate_feature_insight(rf_df))
-    
-    # estimating the probability of employee attrition rate with threshold settings
-    with col2:
-        shap_values, encoded_features = SHAP_explanations(model_rf, df)
-        collapser = ShapCollapser(encoded_features, class_index=1)
-    
-        # Plot signed contributions for class 1
-        fig, ax = plt.subplots()
-        collapser.plot_signed_bar(shap_values, class_index=1)
-        st.pyplot(fig, use_container_width=False)
-        st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
-                       while features shown in blue increase the likelihood of the employee staying.""")
+        df = pd.DataFrame([final_inputs])
+        predict_proba = model_rf.predict_proba(df)[0, 1]
+        if predict_proba < 0.35:
+            st.success(f'✅ Employee is likely to stay with a low attrition risk score of {predict_proba:.2%}')
+            st.write(f'Attrition rate: {predict_proba:.2%}')
+        elif predict_proba >= 0.35 and predict_proba < 0.65:
+            st.warning(f'⚠️ Employee has a moderate risk of leaving the organization with a score of {predict_proba:.2%}')
+            st.write(f'Attrition rate: {predict_proba:.2%}')
+        else:
+            st.error(f'❌ Employee is at a high risk of leaving the organization with a probability of {predict_proba:.2%}')
+            st.write(f'Attrition rate: {predict_proba:.2%}')
         
-        with st.expander('Feature explanations using SHAP'):
-            st.subheader("Top 5 features insights:")
-            # Generate recruiter-friendly narrative
-            st.markdown(collapser.explain(shap_values, top_n=3))
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # ---------------- Visualization ----------------
+            # feature importance scores
+            Feature_Importance(rf_df)
+            with st.expander('Features in global feature importances'):
+                st.markdown("### 🧠 Top 5 Feature Insights\n")
+                st.dataframe(generate_feature_insight(rf_df))
+        
+        # estimating the probability of employee attrition rate with threshold settings
+        with col2:
+            shap_values, encoded_features = SHAP_explanations(model_rf, df)
+            collapser = ShapCollapser(encoded_features, class_index=1)
+        
+            # Plot signed contributions for class 1
+            fig, ax = plt.subplots()
+            collapser.plot_signed_bar(shap_values, class_index=1)
+            st.pyplot(fig, use_container_width=False)
+            st.markdown("""Features shown in red increase the employee’s likelihood of leaving the organization, 
+                           while features shown in blue increase the likelihood of the employee staying.""")
+            
+            with st.expander('Feature explanations using SHAP'):
+                st.subheader("Top 5 features insights:")
+                # Generate recruiter-friendly narrative
+                st.markdown(collapser.explain(shap_values, top_n=3))
 
 with tab2:
     st.title("📊 Portfolio Attrition Evaluation – Batch Processing")
@@ -189,6 +189,7 @@ with tab2:
 
 
         
+
 
 
 
