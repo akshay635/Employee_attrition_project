@@ -114,8 +114,8 @@ with tab2:
         required_features = common_features + target
         missing_features = [col for col in required_features if col not in df.columns]
 
-        if missing_cols:
-            st.error(f"Missing required columns: {missing_cols}")
+        if missing_features:
+            st.error(f"Missing required columns: {missing_features}")
             st.stop()
   
         st.header("⚙️ Decision Configuration")
@@ -189,6 +189,7 @@ with tab2:
 
 
         
+
 
 
 
