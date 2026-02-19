@@ -66,6 +66,6 @@ def load_user_inputs():
               'Overtime': overtime
               }
     
-
     return inputs
+
 
