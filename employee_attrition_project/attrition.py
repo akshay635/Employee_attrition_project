@@ -30,6 +30,7 @@ model_lg, model_rf, model_dt, model_cat = load_models()
 # common selected features 
 common_features = config.COMMON_FEATURES
 target = config.TARGET
+all_features = config.ALL_FEATURES
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
@@ -111,7 +112,7 @@ with tab2:
         st.subheader("Preview of Uploaded Data")
         st.dataframe(df.head(2))
 
-        required_features = common_features + target
+        required_features = all_features + target
         missing_features = [col for col in required_features if col not in df.columns]
 
         if missing_features:
@@ -128,7 +129,7 @@ with tab2:
               step=0.01)
 
         y_true = df[target]
-        X_batch = df[common_features]
+        X_batch = df[all_features]
 
         y_proba = model_rf.predict_proba(X_batch)[:, 1]
         y_pred = (y_proba >= threshold).astype(int)
@@ -189,6 +190,7 @@ with tab2:
 
 
         
+
 
 
 
