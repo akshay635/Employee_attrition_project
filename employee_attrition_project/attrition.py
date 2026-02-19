@@ -114,9 +114,28 @@ with tab2:
         required_features = common_features + target
         missing_features = [col for col in required_features if col not in df.columns]
 
-        if missing_features:
+        if missing_cols:
+            st.error(f"Missing required columns: {missing_cols}")
+            st.stop()
+  
+        st.header("⚙️ Decision Configuration")
 
-        df, y_proba, y_pred, y_true = batch_data_modeling(df)
+        threshold = st.slider(
+              "Decision Threshold",
+              min_value=0.0,
+              max_value=1.0,
+              value=0.5,
+              step=0.01)
+
+        y_true = df[target]
+        X_batch = df[common_features]
+
+        y_proba = model_rf.predict_proba(X_batch)[:, 1]
+        y_pred = (y_proba >= threshold).astype(int)
+      
+        df["Probability"] = y_proba
+        df["Prediction"] = y_pred
+        
         tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
         
         recall = tp / (tp + fn)
@@ -170,6 +189,7 @@ with tab2:
 
 
         
+
 
 
 
