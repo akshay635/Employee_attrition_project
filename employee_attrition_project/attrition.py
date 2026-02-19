@@ -35,7 +35,7 @@ all_features = config.ALL_FEATURES
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
-st.title('Employee Attrition Rate Estimator')
+st.title('Employee Attrition Risk Evaluator')
 
 st.sidebar.markdown(
     """
@@ -97,7 +97,7 @@ with tab1:
                 st.markdown(collapser.explain(shap_values, top_n=3))
 
 with tab2:
-    st.title("📊 Portfolio Attrition Evaluation – Batch Processing")
+    st.title("📊 Employees Attrition Evaluation – Batch Processing")
     st.markdown("""
     Upload employees dataset collected from forms, surveys to perform portfolio-level attrition risk scoring.
     The model applies cost-sensitive learning and threshold-based decision logic.
@@ -191,6 +191,7 @@ with tab2:
 
 
         
+
 
 
 
