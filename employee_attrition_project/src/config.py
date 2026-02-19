@@ -2,6 +2,14 @@
 MEDIANS_PATH = 'employee_attrition_project/data/medians.json'
 MODES_PATH = 'employee_attrition_project/data/modes.json'
 
+# all the features 
+ALL_FEATURES = ['Employee_ID', 'Age', 'Attrition', 'Business_Travel', 'Department',
+                'Distance_From_Home', 'Education', 'Environment_Satisfaction', 'Gender',
+                'Salary', 'Job_Involvement', 'Job_Level', 'Job_Role', 'Job_Satisfaction', 
+                'Marital_Status', 'Number_of_Companies_Worked_previously', 'Overtime',
+                'Salary_Hike_in_percent', 'Total_working_years_experience', 'Work_life_balance', 
+                'No_of_years_worked_at_current_company', 'No_of_years_in_current_role', 'Years_since_last_promotion']
+
 # common selected features 
 COMMON_FEATURES = ['Environment_Satisfaction', 'Salary_Hike_in_percent', 
                    'Salary', 'Job_Involvement', 'Years_since_last_promotion',
@@ -25,6 +33,7 @@ TARGET = ['Attrition']
 
 # OVERTIME ('YES' OR 'NO')
 OVERTIME = ['Yes', 'No']
+
 
 
 
