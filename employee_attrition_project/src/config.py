@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-
 # config.py
-
 MEDIANS_PATH = 'employee_attrition_project/data/medians.json'
 MODES_PATH = 'employee_attrition_project/data/modes.json'
 
@@ -23,6 +20,10 @@ SOFTWARE_ROLES = ['Developer', 'Software Engineer', 'IT', 'Technician',
                   'Support', 'Consultant', 'Director', 'HR', 'Help Desk', 
                   'QA Analyst', 'Manager', 'Business Analyst']
 
+# TARGET variable 
+TARGET = ['']
+
 # OVERTIME ('YES' OR 'NO')
 OVERTIME = ['Yes', 'No']
+
 
