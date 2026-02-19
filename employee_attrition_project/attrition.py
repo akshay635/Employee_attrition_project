@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
 import shap
 import json
 import importlib
@@ -190,6 +191,7 @@ with tab2:
 
 
         
+
 
 
 
