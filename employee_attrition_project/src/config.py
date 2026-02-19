@@ -21,9 +21,10 @@ SOFTWARE_ROLES = ['Developer', 'Software Engineer', 'IT', 'Technician',
                   'QA Analyst', 'Manager', 'Business Analyst']
 
 # TARGET variable 
-TARGET = ['']
+TARGET = ['Attrition']
 
 # OVERTIME ('YES' OR 'NO')
 OVERTIME = ['Yes', 'No']
+
 
 
