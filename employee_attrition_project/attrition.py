@@ -54,7 +54,7 @@ with st.sidebar:
 final_inputs = final_inputs(inputs, medians, modes)
 
 # model_box = st.selectbox('Choose a model', ['Logistic Regression', 'Catboost', 'Random Forest', 'Decision Tree'])
-tab1, tab2 = st.tabs(['Single employee Prediction', 'Batch Prediction'])
+tab1, tab2 = st.tabs(['1️⃣ Single employee Prediction', '📁 Batch Prediction'])
 with tab1:
     if st.button('Predict'):
         df = pd.DataFrame([final_inputs])
@@ -191,6 +191,7 @@ with tab2:
 
 
         
+
 
 
 
