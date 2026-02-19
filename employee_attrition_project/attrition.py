@@ -51,7 +51,9 @@ with st.sidebar:
 final_inputs = final_inputs(inputs, medians, modes)
 
 # model_box = st.selectbox('Choose a model', ['Logistic Regression', 'Catboost', 'Random Forest', 'Decision Tree'])
-if st.button('Predict'):
+tab1, tab2 = st.tabs(['Single employee Prediction', 'Batch Prediction'])
+with tab1:
+    if st.button('Predict'):
     df = pd.DataFrame([final_inputs])
     predict_proba = model_rf.predict_proba(df)[0, 1]
     if predict_proba < 0.35:
@@ -63,9 +65,9 @@ if st.button('Predict'):
     else:
         st.error(f'❌ Employee is at a high risk of leaving the organization with a probability of {predict_proba:.2%}')
         st.write(f'Attrition rate: {predict_proba:.2%}')
-
+    
     col1, col2 = st.columns(2)
-
+    
     with col1:
         # ---------------- Visualization ----------------
         # feature importance scores
@@ -73,12 +75,12 @@ if st.button('Predict'):
         with st.expander('Features in global feature importances'):
             st.markdown("### 🧠 Top 5 Feature Insights\n")
             st.dataframe(generate_feature_insight(rf_df))
-
+    
     # estimating the probability of employee attrition rate with threshold settings
     with col2:
         shap_values, encoded_features = SHAP_explanations(model_rf, df)
         collapser = ShapCollapser(encoded_features, class_index=1)
-
+    
         # Plot signed contributions for class 1
         fig, ax = plt.subplots()
         collapser.plot_signed_bar(shap_values, class_index=1)
@@ -90,8 +92,68 @@ if st.button('Predict'):
             st.subheader("Top 5 features insights:")
             # Generate recruiter-friendly narrative
             st.markdown(collapser.explain(shap_values, top_n=3))
-            #st.dataframe(shap_df_collapsed.head())
-            #st.dataframe(collapse_shap_values(shap_values, encoded_features, config.COMMON_FEATURES))
+
+with tab2:
+    st.title("📊 Portfolio Attrition Evaluation – Batch Processing")
+    st.markdown("""
+    Upload employees dataset collected from forms, surveys to perform portfolio-level attrition risk scoring.
+    The model applies cost-sensitive learning and threshold-based decision logic.
+    """)
+
+    uploaded_file = st.file_uploader(
+    "Upload CSV file containing employees data (must include target column)",
+    type=["csv"])
+
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        st.success(f"File uploaded successfully. Records detected: {len(df)}")
+        st.subheader("Preview of Uploaded Data")
+        st.dataframe(df.head(2))
+
+        df, y_proba, y_pred, y_true = batch_data_modeling(df)
+        tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
+        
+        recall = tp / (tp + fn)
+        miss_rate = fn / (tp + fn)
+        precision = tp / (tp + fp)
+        accuracy = (tp + tn) / (tp + tn + fp + fn)
+        
+        flagged_rate = y_pred.mean()
+
+        st.header("📌 Portfolio Summary")
+
+        col1, col2, col3, col4 = st.columns(4)
+        
+        col1.metric("Total Records", len(df))
+        col2.metric("Flagged High Risk", f"{flagged_rate*100:.2f}%")
+        col3.metric("Recall (Catch Rate)", f"{recall*100:.2f}%")
+        col4.metric("Miss Rate", f"{miss_rate*100:.2f}%")
+
+        st.subheader("🔎 Confusion Matrix")
+
+        st.write(f"""
+        - True Positives: {tp}
+        - False Positives: {fp}
+        - True Negatives: {tn}
+        - False Negatives: {fn}
+        """)
+
+        df["Risk Bucket"] = pd.cut(y_proba, bins=[0, 0.3, 0.6, 1],
+                                   labels=["Low Risk", "Medium Risk", "High Risk"])
+
+        st.subheader("📊 Risk Segmentation Distribution")
+        
+        st.bar_chart(df["Risk Bucket"].value_counts())
+
+        st.subheader("⬇️ Export Scored Portfolio")
+
+        st.download_button(label="Download Scored Dataset", data=df.to_csv(index=False), 
+                           file_name="scored_portfolio.csv", mime="text/csv")
+
+        st.info(f"""At threshold {threshold}, the model detects {recall*100:.1f}% of defaulters 
+        while missing {miss_rate*100:.1f}%. Approximately {flagged_rate*100:.1f}% 
+        of the portfolio is flagged for review.
+        """)
 
     
 
@@ -102,6 +164,7 @@ if st.button('Predict'):
 
 
         
+
 
 
 
