@@ -29,6 +29,7 @@ model_lg, model_rf, model_dt, model_cat = load_models()
 
 # common selected features 
 common_features = config.COMMON_FEATURES
+target = config.TARGET
 
 st.set_page_config(page_title='Employee Attrition Prediction System', layout='wide')
 
@@ -110,6 +111,11 @@ with tab2:
         st.subheader("Preview of Uploaded Data")
         st.dataframe(df.head(2))
 
+        required_features = common_features + target
+        missing_features = [col for col in required_features if col not in df.columns]
+
+        if missing_features:
+
         df, y_proba, y_pred, y_true = batch_data_modeling(df)
         tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
         
@@ -164,6 +170,7 @@ with tab2:
 
 
         
+
 
 
 
