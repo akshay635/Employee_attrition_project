@@ -24,7 +24,7 @@ from scipy.stats import loguniform
 np.random.seed(42)
 pd.set_option('display.max_columns', 500)
 
-data = pd.read_csv('C:/Users/aksha/employee_attrition_project/data/HR_attrition_dataset.csv')
+data = pd.read_csv('employee_attrition_project/data/HR_attrition_dataset.csv')
 
 print(data.shape)
 print(data.head(1))
@@ -132,7 +132,7 @@ params = {
     "ridge__positive": [True, False]
 }
 
-RidgeClassifier
+
 ridge_pipe = Pipeline(steps=[
     ('preprocessing', preprocessor),
     ('ridge', RidgeClassifier(random_state=42, class_weight={0:1, 1:scale_pos_weight}, max_iter=2000))
@@ -151,11 +151,11 @@ print(best_score, best_params)
 clean_params = {k.split("__", 1)[-1]: v for k, v in best_params.items()}
 
 # storing the best params in json
-with open("C:/Users/aksha/employee_attrition_project/best_params.json", "w") as f:
+with open("employee_attrition_project/data/best_params.json", "w") as f:
     json.dump(clean_params, f)
 
 # loading the best params from json
-with open("C:/Users/aksha/employee_attrition_project/best_params.json", "r") as f:
+with open("employee_attrition_project/data/best_params.json", "r") as f:
     best_params = json.load(f)
     
 from sklearn.calibration import CalibratedClassifierCV
@@ -202,10 +202,10 @@ schema = {
 }
 
 # storing the best params in json
-with open("C:/Users/aksha/employee_attrition_project/schema.json", "w") as f:
+with open("employee_attrition_project/data/schema.json", "w") as f:
     json.dump(schema, f, indent=4)
     
-joblib.dump(final_ridge_pipe,'C:/Users/aksha/employee_attrition_project/models/final_model_v1.joblib')
+joblib.dump(final_ridge_pipe,'employee_attrition_project/models/final_model_v1.joblib')
     
 cm = confusion_matrix(y_test, pred)
 
@@ -217,5 +217,6 @@ ax.set_ylabel("Actual")
 ax.set_title("Confusion Matrix")
 
 plt.tight_layout()
-plt.savefig("C:/Users/aksha/employee_attrition_project/confusion_matrix.png")
+plt.savefig("employee_attrition_project/confusion_matrix.png")
+
 plt.close()
