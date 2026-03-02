@@ -4,8 +4,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt 
 import warnings
-import json
 warnings.filterwarnings('ignore')
+import json
 import joblib
 from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split, RandomizedSearchCV
 from sklearn.impute import SimpleImputer
@@ -220,4 +220,5 @@ plt.tight_layout()
 plt.savefig("employee_attrition_project/confusion_matrix.png")
 
 plt.close()
+
 
