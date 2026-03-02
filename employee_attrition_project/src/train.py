@@ -205,7 +205,7 @@ schema = {
 with open("employee_attrition_project/data/schema.json", "w") as f:
     json.dump(schema, f, indent=4)
     
-joblib.dump(final_ridge_pipe,'employee_attrition_project/models/final_model_v1.joblib')
+joblib.dump(final_ridge_pipe,'employee_attrition_project/models/current_model.joblib')
     
 cm = confusion_matrix(y_test, pred)
 
@@ -220,3 +220,4 @@ plt.tight_layout()
 plt.savefig("employee_attrition_project/confusion_matrix.png")
 
 plt.close()
+
