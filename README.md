@@ -1,19 +1,14 @@
 # Employee_attrition_project
 Employee Attrition detection.
 
-~Developed an employee attrition risk prediction solution using employee survey and historical HR data, observing an overall attrition rate of ~22.5%.
+🔹 Key Results
 
-~Compared Logistic Regression, Decision Tree, CatBoost, and Random Forest models with a focus on minimizing missed attrition cases rather than accuracy.
+~Built an end-to-end employee attrition prediction pipeline using feature engineering, preprocessing, and cross-validated model comparison.
 
-~Selected Random Forest as the final model, achieving the lowest missed-risk rate (~16.9%) among evaluated models.
+~Achieved ROC-AUC of 0.75 and PR-AUC of 0.49, demonstrating strong discrimination on imbalanced data.
 
-~Translated prediction probabilities into actionable risk segments, categorizing employees into high-risk (~8%), medium-risk (~51%), and low-risk (~41%) groups to support focused retention planning.
+~Optimized classification threshold (0.50 → 0.20) using Precision-Recall analysis, improving recall from 29% to 74% while maintaining 35% precision.
 
-~Designed and HR-facing application that accepts new employee survey inputs and generates and generates the real-time attrition risk scores and risk buckets (high/medium/low) to support targeted interventions.
-
-~Thresholds set:-
-Low:- <35% 
-Medium:- 35%-65%
-High:- >65%
+~Enabled proactive retention strategy by prioritizing high-risk employees based on cost-sensitive decision tuning.
 
 Skills: Python (Programming Language) · Plotly · Scikit-Learn · Catboost · Streamlit · Pandas · NumPy · Joblib · Seaborn · Matplotlib
