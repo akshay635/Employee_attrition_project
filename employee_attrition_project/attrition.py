@@ -25,8 +25,8 @@ with open(config.MODES_PATH, 'r') as file:
     modes = json.load(file)
 
 # imported all the models and features importances, but Random Forest(rf) will be used as the best case
-lg_df, rf_df, dt_df, cat_df = load_data()
-model_lg, model_rf, model_dt, model_cat = load_models()
+rf_df = load_data()
+model_rf = load_models()
 
 # common selected features 
 common_features = config.COMMON_FEATURES
@@ -191,6 +191,7 @@ with tab2:
 
 
         
+
 
 
 
