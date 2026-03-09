@@ -9,7 +9,7 @@ Multiple classification models were implemented using machine learning pipelines
 
 Finally, the application was deployed as an interactive web app using Streamlit, with hosting on Render for public access.
 
-#🔹 Key Results 
+# Key Results 
 
 ~Built an end-to-end employee attrition prediction pipeline using feature engineering, preprocessing, and cross-validated model comparison.
 
