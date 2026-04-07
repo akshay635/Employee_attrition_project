@@ -33,7 +33,7 @@ common_features = config.COMMON_FEATURES
 target = config.TARGET
 all_features = config.ALL_FEATURES
 
-st.set_page_config(page_title='Employee Attrition Prediction System', page_icon='🏢🚶🚪📉', layout='wide')
+st.set_page_config(page_title='Employee Attrition Prediction System', page_icon='🏢', layout='wide')
 
 st.title('Employee Attrition Risk Evaluator', text_alignment="center")
 
